@@ -1688,3 +1688,45 @@ GenericAPIView is acceptable.
 APIView is allowed only when justified.
 
 **APIResponse wrapper is mandatory for all responses.**
+
+---
+
+# Git Rule (Mandatory)
+
+**The AI agent must NEVER run `git commit`, `git push`, or `git add`.**
+
+The user performs all version control actions manually.
+
+## The agent must NOT
+
+- Run `git commit`
+- Run `git push`
+- Run `git add` / `git stage`
+- Amend, rebase, merge, tag, or create pull requests
+- Run any other command that changes repository state
+
+## The agent must
+
+- Write and edit code files
+- Run verification only: `python manage.py check`,
+  `python manage.py makemigrations`, `python manage.py makemigrations --check --dry-run`,
+  `ruff check .`, `ruff format --check .`
+- List exactly which files were created, modified, or deleted
+- **Provide a ready-to-paste commit message** for the user to use
+
+## The agent may
+
+- Run read-only git commands for inspection: `git status`, `git log`,
+  `git diff`, `git branch`, `git remote`, `git show`
+
+## The user performs
+
+```bash
+git add -A
+git commit -m "<message provided by the agent>"
+git push
+```
+
+Then merges the pull request on GitHub.
+
+**Reporting a commit message is not permission to commit it.**
