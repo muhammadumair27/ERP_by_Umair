@@ -1,0 +1,32 @@
+# =============================================================================
+# Manufacturing ERP - Base Requirements
+# Shared by every environment (local, test, production).
+# =============================================================================
+
+# --- Core framework -----------------------------------------------------------
+Django==5.2.17
+
+# --- API layer ----------------------------------------------------------------
+djangorestframework==3.18.1
+djangorestframework-simplejwt==5.5.1
+django-filter==26.1
+drf-spectacular==0.30.0
+drf-spectacular-sidecar==2026.10.1
+django-cors-headers==4.9.0
+
+# --- Configuration ------------------------------------------------------------
+django-environ==0.14.0
+
+# --- Database -----------------------------------------------------------------
+psycopg[binary]==3.3.6
+
+# --- Cache / broker -----------------------------------------------------------
+redis==8.1.0
+django-redis==7.0.0
+
+# --- Background processing ----------------------------------------------------
+celery==5.6.3
+django-celery-beat==2.9.0
+
+# --- Security -----------------------------------------------------------------
+argon2-cffi==25.1.0
