@@ -11,7 +11,7 @@ Legend: `[x]` done - `[~]` in progress - `[ ]` not started
 | Step | Scope | Status |
 |---|---|---|
 | 1A | Bootstrap (config, common layer skeleton, custom user, tooling, Docker) | `[x]` |
-| 1B | Common layer (base models, mixins, pagination, filters, permissions) | `[ ]` |
+| 1B | Common layer (base models, soft delete, services, selectors, validators) | `[x]` |
 | 1C | Organizations (multi-tenant root model + enforcement) | `[ ]` |
 | 1D | Accounts (auth flows, registration, profile, JWT) | `[ ]` |
 | 1E | RBAC (Permission, Role, RolePermission, UserRoleAssignment) | `[ ]` |
@@ -32,6 +32,22 @@ Legend: `[x]` done - `[~]` in progress - `[ ]` not started
 - [x] Test scaffolding (`tests/` + factory-boy factories)
 - [x] `python manage.py check` passes for local / test / production
 - [x] `ruff check` and `ruff format --check` pass
+
+### 1B - Common layer (complete)
+
+- [x] `UUIDModel` - UUID v4 primary key for domain entities
+- [x] `SoftDeleteModel` - reversible deletion (`is_deleted`, `deleted_at`)
+- [x] `SoftDeleteQuerySet` - bulk `delete`, `hard_delete`, `alive`, `dead`, `restore`
+- [x] `SoftDeleteManager` - default manager that hides deleted rows
+- [x] `AllObjectsManager` - manager that includes deleted rows
+- [x] `BaseModel` - `UUIDModel` + `TimeStampedModel` + `SoftDeleteModel`
+- [x] `BaseService` - shared `atomic()` transaction boundary
+- [x] `BaseSelector` - shared read-side query entry point
+- [x] Shared validators: phone number, tax number, non-negative quantity
+- [x] Runtime introspection probe passes (managers, MRO, inherited fields)
+
+> Design decisions locked in: **UUID primary keys** for domain models,
+> **soft delete enabled** by default, **`...Z` ISO-8601 UTC timestamps**.
 
 ---
 
